@@ -1,7 +1,7 @@
 def main():
 
-    
- def display_menu():
+
+def display_menu():
     print("\nPersonal Budget Tracker")
     print("1. Add expense")
     print("2. View expenses")
@@ -10,7 +10,7 @@ def main():
     print("5. Exit")
 
 
- def add_expense(expenses):
+def add_expense(expenses):
     try:
         category = input("Enter the category of the expense (e.g., Food, Transport): ")
         amount = float(input("Enter the amount for the expense: "))
@@ -20,7 +20,7 @@ def main():
         print("Please enter a valid number for the expense amount.")
 
 
- def view_expenses(expenses):
+def view_expenses(expenses):
     if not expenses:
         print("No expenses recorded yet.")
         return
@@ -29,16 +29,16 @@ def main():
         print(f"Category: {expense['category']} - Amount: ${expense['amount']:.2f}")
 
 
- def set_budget():
+def set_budget():
     try:
         budget = float(input("Enter your budget amount: "))
         return budget
     except ValueError:
         print("Please enter a valid number for the budget.")
-        return set_budget()  
+        return set_budget()
 
 
- def check_budget(expenses, budget):
+def check_budget(expenses, budget):
     total_expenses = sum(expense['amount'] for expense in expenses)
     print(f"\nTotal Expenses: ${total_expenses:.2f}")
     if total_expenses > budget:
@@ -47,24 +47,24 @@ def main():
         print(f"Your remaining budget is: ${budget - total_expenses:.2f}")
 
 
- def main():
-    expenses = []  
-    budget = 0.0   
+def main():
+    expenses = []
+    budget = 0.0
     while True:
-        display_menu()  
+        display_menu()
         choice = input("Choose an option (1-5): ")
 
         if choice == '1':
-            add_expense(expenses)  
+            add_expense(expenses)
         elif choice == '2':
-            view_expenses(expenses)  
+            view_expenses(expenses)
         elif choice == '3':
-            budget = set_budget()  
+            budget = set_budget()
         elif choice == '4':
-            check_budget(expenses, budget)  
+            check_budget(expenses, budget)
         elif choice == '5':
             print("Exiting the program. Goodbye!")
-            break 
+            break
         else:
             print("Invalid option, please choose again.")
 
