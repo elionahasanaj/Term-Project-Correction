@@ -1,0 +1,73 @@
+def main():
+
+    
+ def display_menu():
+    print("\nPersonal Budget Tracker")
+    print("1. Add expense")
+    print("2. View expenses")
+    print("3. Set budget")
+    print("4. Check if budget is exceeded")
+    print("5. Exit")
+
+
+ def add_expense(expenses):
+    try:
+        category = input("Enter the category of the expense (e.g., Food, Transport): ")
+        amount = float(input("Enter the amount for the expense: "))
+        expenses.append({"category": category, "amount": amount})
+        print(f"Expense of {amount} added to {category}.")
+    except ValueError:
+        print("Please enter a valid number for the expense amount.")
+
+
+ def view_expenses(expenses):
+    if not expenses:
+        print("No expenses recorded yet.")
+        return
+    print("\nExpenses Summary:")
+    for expense in expenses:
+        print(f"Category: {expense['category']} - Amount: ${expense['amount']:.2f}")
+
+
+ def set_budget():
+    try:
+        budget = float(input("Enter your budget amount: "))
+        return budget
+    except ValueError:
+        print("Please enter a valid number for the budget.")
+        return set_budget()  
+
+
+ def check_budget(expenses, budget):
+    total_expenses = sum(expense['amount'] for expense in expenses)
+    print(f"\nTotal Expenses: ${total_expenses:.2f}")
+    if total_expenses > budget:
+        print(f"Warning: You have exceeded your budget by ${total_expenses - budget:.2f}.")
+    else:
+        print(f"Your remaining budget is: ${budget - total_expenses:.2f}")
+
+
+ def main():
+    expenses = []  
+    budget = 0.0   
+    while True:
+        display_menu()  
+        choice = input("Choose an option (1-5): ")
+
+        if choice == '1':
+            add_expense(expenses)  
+        elif choice == '2':
+            view_expenses(expenses)  
+        elif choice == '3':
+            budget = set_budget()  
+        elif choice == '4':
+            check_budget(expenses, budget)  
+        elif choice == '5':
+            print("Exiting the program. Goodbye!")
+            break 
+        else:
+            print("Invalid option, please choose again.")
+
+
+if __name__ == "__main__":
+    main()
